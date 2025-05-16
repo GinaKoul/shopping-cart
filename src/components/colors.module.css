@@ -1,0 +1,37 @@
+.primaryBg {
+  background-color: #8fa38a;
+}
+
+.primaryBgLight {
+  background-color: #b8d2b3;
+}
+
+.primaryBorder {
+  border-color: #8fa38a;
+}
+
+.primaryColor {
+  color: #333333;
+}
+
+.secondaryBg {
+  background-color: #647a67;
+}
+
+.secondaryBorder {
+  border-color: #647a67;
+}
+
+.secondaryColor {
+  color: #fefefe;
+}
+.primaryBtn {
+  composes: primaryBg;
+  composes: primaryBorder;
+  composes: primaryColor;
+}
+.primaryBtn:hover,
+.primaryBtn:focus {
+  background-color: #b8d2b3;
+  border-color: #647a67;
+}

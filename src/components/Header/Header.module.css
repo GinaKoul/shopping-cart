@@ -1,0 +1,6 @@
+.header {
+  composes: secondaryBg from "../colors.module.css";
+  composes: secondaryColor from "../colors.module.css";
+  width: 100%;
+  padding: 16px;
+}

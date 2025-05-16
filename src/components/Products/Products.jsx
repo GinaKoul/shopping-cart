@@ -1,8 +1,8 @@
-import useShopData from "../../hooks/useShopData.jsx";
+import useProductData from "../../hooks/useProductData.jsx";
 import Card from "../Card/Card.jsx";
 
-const ShopPage = () => {
-  const { data, error, loading } = useShopData();
+const Products = () => {
+  const { data, error, loading } = useProductData();
 
   return (
     <>
@@ -23,4 +23,4 @@ const ShopPage = () => {
   );
 };
 
-export default ShopPage;
+export default Products;

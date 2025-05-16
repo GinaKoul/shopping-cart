@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import getFetchRequest from "../functions/getFetchRequest.jsx";
+import getFetchRequest from "../functions/getFetchRequest.mock.jsx";
 
 const useShopData = () => {
   const [data, setData] = useState([]);

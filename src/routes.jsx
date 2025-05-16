@@ -1,6 +1,6 @@
 import App from "./App.jsx";
 import Homepage from "./components/HomePage/HomePage.jsx";
-import ShopPage from "./components/ShopPage/ShopPage.jsx";
+import Products from "./components/Products/Products.jsx";
 import Checkout from "./components/Checkout/Checkout.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
 
@@ -11,7 +11,7 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Homepage /> },
-      { path: "shoppage", element: <ShopPage /> },
+      { path: "products", element: <Products /> },
       { path: "checkout", element: <Checkout /> },
     ],
   },

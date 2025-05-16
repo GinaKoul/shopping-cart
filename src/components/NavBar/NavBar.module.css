@@ -1,0 +1,8 @@
+.link {
+  composes: secondaryColor from "../colors.module.css";
+  padding: 0 8px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
