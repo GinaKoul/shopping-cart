@@ -6,13 +6,11 @@ const NavBar = ({ items }) => {
   return (
     <nav className={styles.nav}>
       {items &&
-        items.map((item) => {
-          return (
-            <Link key={item.name} to={item.url} className={styles.link}>
-              {item.name}
-            </Link>
-          );
-        })}
+        items.map((item) => (
+          <Link key={item.name} to={item.url} className={styles.link}>
+            {item.name}
+          </Link>
+        ))}
     </nav>
   );
 };

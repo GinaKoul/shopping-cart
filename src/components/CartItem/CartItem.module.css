@@ -1,0 +1,27 @@
+.cartItem {
+  composes: secondaryBorder from "../colors.module.css";
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  text-align: start;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 8px;
+}
+
+.cartItemImg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.cartItem h3 {
+  font-size: 18px;
+}
+
+.cartItem button {
+  /* margin: 32px auto 24px auto; */
+}

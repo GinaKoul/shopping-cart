@@ -10,7 +10,6 @@ describe("Header component", () => {
 
   it("displays default h1 when not given a prop", () => {
     render(<Header />);
-    console.log(screen.getByRole("heading").textContent);
     expect(screen.getByRole("heading").textContent).toMatch(/[\S\s]+[\S]+/);
   });
 
