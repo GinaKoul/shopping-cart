@@ -1,16 +1,18 @@
 import styles from "./Header.module.css";
-import { Link } from "react-router-dom";
-import NavBar from "../NavBar/NavBar.jsx";
+import PropTypes from "prop-types";
 
-const Header = () => {
+const Header = ({ title = "My Store", children }) => {
   return (
     <header className={styles.header}>
-      <Link to="/">
-        <img src="null" alt="logo" />
-      </Link>
-      <NavBar />
+      {title && <h1>{title}</h1>}
+      {children}
     </header>
   );
+};
+
+Header.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.element,
 };
 
 export default Header;

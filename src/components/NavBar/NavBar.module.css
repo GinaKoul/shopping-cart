@@ -1,3 +1,7 @@
+.nav {
+  width: fit-content;
+}
+
 .link {
   composes: secondaryColor from "../colors.module.css";
   padding: 0 8px;

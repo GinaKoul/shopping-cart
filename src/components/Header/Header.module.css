@@ -1,6 +1,14 @@
 .header {
   composes: secondaryBg from "../colors.module.css";
   composes: secondaryColor from "../colors.module.css";
-  width: 100%;
+  width: calc(100% - 16px * 2);
   padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  width: fit-content;
+  margin: 0;
 }
