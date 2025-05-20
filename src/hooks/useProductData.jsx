@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import getFetchRequest from "../functions/getFetchRequest.mock.jsx";
 
-const useShopData = () => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+const useProductData = () => {
+  const [productData, setProductData] = useState([]);
+  const [productError, setProductError] = useState(null);
+  const [productLoading, setProductLoading] = useState(true);
 
   useEffect(() => {
     let ignore = false;
@@ -15,13 +15,13 @@ const useShopData = () => {
         );
 
         if (!ignore) {
-          setData(data);
-          setError(null);
+          setProductData(data);
+          setProductError(null);
         }
       } catch (err) {
-        setError(err);
+        setProductError(err);
       } finally {
-        setLoading(false);
+        setProductLoading(false);
       }
     };
 
@@ -30,7 +30,7 @@ const useShopData = () => {
     return () => (ignore = true);
   }, []);
 
-  return { data, error, loading };
+  return { productData, productError, productLoading };
 };
 
-export default useShopData;
+export default useProductData;

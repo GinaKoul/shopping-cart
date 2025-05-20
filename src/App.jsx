@@ -6,17 +6,20 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 
 const App = () => {
   const [cartItemsIds, setCartItemsIds] = useState([]);
+  const [quantities, setQuantities] = useState(new Map());
 
   const handleAddToCart = (e) => {
     const addedItem = e.target.closest("article").getAttribute("dataid");
-    if (!cartItemsIds.find((item) => item.id === addedItem))
-      setCartItemsIds([...cartItemsIds, { id: addedItem, quantity: 1 }]);
+    if (!cartItemsIds.find((item) => item.id === addedItem)) {
+      setCartItemsIds([...cartItemsIds, addedItem]);
+      setQuantities(new Map(quantities).set(addedItem, 1));
+    }
   };
 
   const handleRemoveFromCart = (e) => {
     const removedItemId = e.target.closest("article").getAttribute("dataid");
-    console.log(removedItemId);
-    setCartItemsIds(cartItemsIds.filter((item) => item.id !== removedItemId));
+    setCartItemsIds(cartItemsIds.filter((item) => item !== removedItemId));
+    setQuantities(new Map(quantities).delete(removedItemId));
   };
 
   return (
