@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import styles from "./ShoppingCart.module.css";
 import CartItem from "../CartItem/CartItem";
 
-const ShoppingCart = ({ cartItems }) => {
+const ShoppingCart = ({ cartItems, handleRemoveFromCart }) => {
   return (
     <aside className={styles.cart}>
       <h2>Cart items</h2>
@@ -15,6 +15,7 @@ const ShoppingCart = ({ cartItems }) => {
                 title={item.title}
                 price={item.price}
                 image={item.image}
+                handleRemoveFromCart={handleRemoveFromCart}
               />
             </li>
           ))}
@@ -25,6 +26,7 @@ const ShoppingCart = ({ cartItems }) => {
 
 ShoppingCart.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
+  handleRemoveFromCart: PropTypes.func,
 };
 
 export default ShoppingCart;

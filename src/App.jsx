@@ -8,14 +8,17 @@ const App = () => {
   const [cartItemsIds, setCartItemsIds] = useState([]);
 
   const handleAddToCart = (e) => {
-    const addedItem = e.target;
-    setCartItemsIds([...cartItemsIds, addedItem]);
+    const addedItem = e.target.closest("article").getAttribute("dataid");
+    if (!cartItemsIds.find((item) => item.id === addedItem))
+      setCartItemsIds([...cartItemsIds, { id: addedItem, quantity: 1 }]);
   };
 
   const handleRemoveFromCart = (e) => {
-    const removedItemId = e.target;
+    const removedItemId = e.target.closest("article").getAttribute("dataid");
+    console.log(removedItemId);
     setCartItemsIds(cartItemsIds.filter((item) => item.id !== removedItemId));
   };
+
   return (
     <>
       <Header>
@@ -28,9 +31,7 @@ const App = () => {
       </Header>
       <main>
         <Outlet
-          cartItemsIds={cartItemsIds}
-          handleAddToCart={handleAddToCart}
-          handleRemoveFromCart={handleRemoveFromCart}
+          context={{ cartItemsIds, handleAddToCart, handleRemoveFromCart }}
         />
       </main>
     </>

@@ -2,7 +2,13 @@ import styles from "./Card.module.css";
 import PropTypes from "prop-types";
 import Button from "../Button/Button.jsx";
 
-const Card = ({ id, title = "Item Title", price = 0.0, image }) => {
+const Card = ({
+  id,
+  title = "Item Title",
+  price = 0.0,
+  image,
+  handleAddToCart,
+}) => {
   const priceRound = Math.ceil(price);
 
   return (
@@ -14,7 +20,7 @@ const Card = ({ id, title = "Item Title", price = 0.0, image }) => {
           <b>
             {price} <span>€</span>
           </b>
-          <Button label="Add To Cart" />
+          <Button label="Add To Cart" handleClick={handleAddToCart} />
         </>
       )}
     </article>
@@ -25,6 +31,7 @@ Card.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
   price: PropTypes.number,
+  handleAddToCart: PropTypes.func,
 };
 
 export default Card;

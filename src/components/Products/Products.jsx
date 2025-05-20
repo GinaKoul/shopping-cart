@@ -1,11 +1,25 @@
+import { useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styles from "./Products.module.css";
 import useProductData from "../../hooks/useProductData.jsx";
 import Card from "../Card/Card.jsx";
 import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 
 const Products = () => {
+  const { cartItemsIds, handleAddToCart, handleRemoveFromCart } =
+    useOutletContext();
   const { data, error, loading } = useProductData();
-  const cartItems = data.slice(0, 5);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    let newCart = [];
+    cartItemsIds.forEach((item) => {
+      newCart.push({ id: item.id, quantity: item.quantity });
+    });
+
+    setCartItems(newCart);
+  }, [cartItemsIds]);
+
   return (
     <>
       <div className={styles.grid}>
@@ -22,11 +36,15 @@ const Products = () => {
                   title={item.title}
                   price={item.price}
                   image={item.image}
+                  handleAddToCart={handleAddToCart}
                 />
               ))}
           </div>
         </section>
-        <ShoppingCart cartItems={cartItems} />
+        <ShoppingCart
+          cartItems={cartItems}
+          handleRemoveFromCart={handleRemoveFromCart}
+        />
       </div>
     </>
   );
