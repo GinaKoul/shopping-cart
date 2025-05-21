@@ -1,5 +1,6 @@
 import styles from "./Card.module.css";
 import PropTypes from "prop-types";
+import Quantity from "../Quantity/Quantity.jsx";
 import Button from "../Button/Button.jsx";
 
 const Card = ({
@@ -20,6 +21,7 @@ const Card = ({
           <b>
             {price} <span>€</span>
           </b>
+          <Quantity id={"cardQuantity" + id} />
           <Button label="Add To Cart" handleClick={handleAddToCart} />
         </>
       )}
@@ -31,6 +33,7 @@ Card.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
   price: PropTypes.number,
+  image: PropTypes.string,
   handleAddToCart: PropTypes.func,
 };
 

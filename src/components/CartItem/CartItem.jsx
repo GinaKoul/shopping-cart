@@ -31,6 +31,7 @@ CartItem.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
   price: PropTypes.number,
+  image: PropTypes.string,
   handleRemoveFromCart: PropTypes.func,
 };
 
