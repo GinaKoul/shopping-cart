@@ -5,7 +5,7 @@ import Card from "../Card/Card.jsx";
 import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 
 const Products = () => {
-  const { cartItemsIds, handleAddToCart, handleRemoveFromCart } =
+  const { cartItemsIds, quantities, handleAddToCart, handleRemoveFromCart } =
     useOutletContext();
   const { productData, productError, productLoading } = useProductData();
 
@@ -32,6 +32,7 @@ const Products = () => {
         </section>
         <ShoppingCart
           cartItemsIds={cartItemsIds}
+          quantities={quantities}
           handleRemoveFromCart={handleRemoveFromCart}
         />
       </div>

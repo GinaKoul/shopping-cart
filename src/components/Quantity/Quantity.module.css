@@ -1,0 +1,28 @@
+.quantityField {
+  margin-top: 16px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px; */
+}
+
+.quantity {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.quantity button {
+  margin: 0;
+}
+
+.quantityInput {
+  composes: secondaryBorder from "../colors.module.css";
+  max-width: 50px;
+  text-align: center;
+  outline: none;
+  border-width: 2px;
+  border-style: solid;
+}

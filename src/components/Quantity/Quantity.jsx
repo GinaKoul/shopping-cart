@@ -1,8 +1,10 @@
+import styles from "./Quantity.module.css";
 import { useState } from "react";
+import PropTypes from "prop-types";
 import Button from "../Button/Button.jsx";
 
-const Quantity = ({ id }) => {
-  const [quantity, setQuantity] = useState(1);
+const Quantity = ({ id, value = 1 }) => {
+  const [quantity, setQuantity] = useState(value);
 
   const handleChange = (e) => {
     setQuantity(parseInt(e.target.value) || "");
@@ -18,15 +20,26 @@ const Quantity = ({ id }) => {
   };
 
   return (
-    <>
+    <div className={styles.quantityField}>
       <label htmlFor={id}>Quantity</label>
-      <div>
-        <Button label="-" handleClick={handleDecrement} />
-        <input id={id} type="text" value={quantity} onChange={handleChange} />
-        <Button label="+" handleClick={handleIncrement} />
+      <div className={styles.quantity}>
+        <Button type="decrease" label="-" handleClick={handleDecrement} />
+        <input
+          id={id}
+          className={styles.quantityInput}
+          type="text"
+          value={quantity}
+          onChange={handleChange}
+        />
+        <Button type="increase" label="+" handleClick={handleIncrement} />
       </div>
-    </>
+    </div>
   );
+};
+
+Quantity.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.number,
 };
 
 export default Quantity;

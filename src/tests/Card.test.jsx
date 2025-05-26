@@ -54,7 +54,42 @@ describe("Card component", () => {
       image: null,
     };
     render(<Card {...cardProps} />);
-    expect(screen.queryByRole("button")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Add To Cart" })
+    ).toBeInTheDocument();
+  });
+
+  it("Displays card increase quantity button on screen when rendered and price is greater than zero", () => {
+    const cardProps = {
+      id: "1",
+      title: "Item Title",
+      price: 10,
+      image: null,
+    };
+    render(<Card {...cardProps} />);
+    expect(screen.queryByRole("button", { name: "+" })).toBeInTheDocument();
+  });
+
+    it("Displays card decrease quantity button on screen when rendered and price is greater than zero", () => {
+    const cardProps = {
+      id: "1",
+      title: "Item Title",
+      price: 10,
+      image: null,
+    };
+    render(<Card {...cardProps} />);
+    expect(screen.queryByRole("button", { name: "-" })).toBeInTheDocument();
+  });
+
+      it("Displays card increase quantity button on screen when rendered and price is greater than zero", () => {
+    const cardProps = {
+      id: "1",
+      title: "Item Title",
+      price: 10,
+      image: null,
+    };
+    render(<Card {...cardProps} />);
+    expect(screen.queryByRole("button", { name: "+" })).toBeInTheDocument();
   });
 
   it("Does not display card price and add to cart button on screen when rendered with a price equal or smaller than zero", () => {

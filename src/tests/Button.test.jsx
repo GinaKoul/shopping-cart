@@ -15,4 +15,23 @@ describe("Button component", () => {
     render(<Button {...buttonProps} />);
     expect(screen.getByRole("button").textContent).toMatch(buttonProps.label);
   });
+
+  //   it("should call the onClick function when clicked", async () => {
+  //   const onClick = vi.fn();
+  //   const user = userEvent.setup()
+  //   render(<CustomButton onClick={onClick} />);
+
+  //   const button = screen.getByRole("button", { name: "Click me" });
+
+  //   await user.click(button);
+
+  //   expect(onClick).toHaveBeenCalled();
+  // });
+
+  // it("should not call the onClick function when it isn't clicked", async () => {
+  //   const onClick = vi.fn();
+  //   render(<CustomButton onClick={onClick} />);
+
+  //   expect(onClick).not.toHaveBeenCalled();
+  // });
 });

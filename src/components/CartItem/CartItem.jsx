@@ -1,11 +1,13 @@
 import styles from "./CartItem.module.css";
 import PropTypes from "prop-types";
+import Quantity from "../Quantity/Quantity.jsx";
 import Button from "../Button/Button.jsx";
 
 const CartItem = ({
   id,
   title = "Item Title",
   price = 0.0,
+  quantity = 1,
   image,
   handleRemoveFromCart,
 }) => {
@@ -20,6 +22,7 @@ const CartItem = ({
           <b>
             {price} <span>€</span>
           </b>
+          <Quantity id={"cardQuantity" + id} value={quantity} />
           <Button label="Remove" handleClick={handleRemoveFromCart} />
         </>
       )}
@@ -31,6 +34,7 @@ CartItem.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string,
   price: PropTypes.number,
+  quantity: PropTypes.number,
   image: PropTypes.string,
   handleRemoveFromCart: PropTypes.func,
 };

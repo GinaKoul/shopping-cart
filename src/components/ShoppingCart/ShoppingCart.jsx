@@ -3,7 +3,11 @@ import styles from "./ShoppingCart.module.css";
 import useCartData from "../../hooks/useCartData.jsx";
 import CartItem from "../CartItem/CartItem";
 
-const ShoppingCart = ({ cartItemsIds, handleRemoveFromCart }) => {
+const ShoppingCart = ({
+  cartItemsIds = [],
+  quantities,
+  handleRemoveFromCart,
+}) => {
   const { cartData, cartError, cartLoading } = useCartData(cartItemsIds);
 
   return (
@@ -19,6 +23,7 @@ const ShoppingCart = ({ cartItemsIds, handleRemoveFromCart }) => {
                 id={item.id}
                 title={item.title}
                 price={item.price}
+                quantity={quantities.get(`${item.id}`)}
                 image={item.image}
                 handleRemoveFromCart={handleRemoveFromCart}
               />
@@ -30,7 +35,10 @@ const ShoppingCart = ({ cartItemsIds, handleRemoveFromCart }) => {
 };
 
 ShoppingCart.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
+  cartItemsIds: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  quantities: PropTypes.objectOf(PropTypes.number),
   handleRemoveFromCart: PropTypes.func,
 };
 

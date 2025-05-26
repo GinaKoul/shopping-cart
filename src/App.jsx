@@ -9,10 +9,17 @@ const App = () => {
   const [quantities, setQuantities] = useState(new Map());
 
   const handleAddToCart = (e) => {
-    const addedItem = e.target.closest("article").getAttribute("dataid");
+    const card = e.target.closest("article");
+    const addedItem = card.getAttribute("dataid");
     if (!cartItemsIds.find((item) => item.id === addedItem)) {
+      const itemQuantity = card.querySelector("input");
       setCartItemsIds([...cartItemsIds, addedItem]);
-      setQuantities(new Map(quantities).set(addedItem, 1));
+      setQuantities(
+        new Map(quantities).set(
+          addedItem,
+          itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
+        )
+      );
     }
   };
 
@@ -34,7 +41,12 @@ const App = () => {
       </Header>
       <main>
         <Outlet
-          context={{ cartItemsIds, handleAddToCart, handleRemoveFromCart }}
+          context={{
+            cartItemsIds,
+            quantities,
+            handleAddToCart,
+            handleRemoveFromCart,
+          }}
         />
       </main>
     </>
