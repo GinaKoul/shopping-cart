@@ -10,8 +10,8 @@ const App = () => {
 
   const handleAddToCart = (e) => {
     const card = e.target.closest("article");
-    const addedItem = card.getAttribute("dataid");
-    if (!cartItemsIds.find((item) => item.id === addedItem)) {
+    const addedItem = Number(card.getAttribute("dataid"));
+    if (!cartItemsIds.includes(addedItem)) {
       const itemQuantity = card.querySelector("input");
       setCartItemsIds([...cartItemsIds, addedItem]);
       setQuantities(
@@ -24,9 +24,18 @@ const App = () => {
   };
 
   const handleRemoveFromCart = (e) => {
-    const removedItemId = e.target.closest("article").getAttribute("dataid");
+    const removedItemId = Number(
+      e.target.closest("article").getAttribute("dataid")
+    );
     setCartItemsIds(cartItemsIds.filter((item) => item !== removedItemId));
-    setQuantities(new Map(quantities).delete(removedItemId));
+    const newMap = new Map(quantities);
+    newMap.delete(removedItemId);
+    setQuantities(newMap);
+  };
+
+  const handleCartReset = () => {
+    setCartItemsIds([]);
+    setQuantities(new Map());
   };
 
   return (
@@ -36,6 +45,7 @@ const App = () => {
           items={[
             { url: "/", name: "Homepage" },
             { url: "/products", name: "Products" },
+            { url: "/checkout", name: "Checkout" },
           ]}
         />
       </Header>
@@ -46,6 +56,7 @@ const App = () => {
             quantities,
             handleAddToCart,
             handleRemoveFromCart,
+            handleCartReset,
           }}
         />
       </main>

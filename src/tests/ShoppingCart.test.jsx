@@ -3,14 +3,9 @@ import { render, screen } from "@testing-library/react";
 import ShoppingCart from "../components/ShoppingCart/ShoppingCart.jsx";
 
 describe("ShoppingCart component", async () => {
-  it("Displays aside when rendered", () => {
-    render(<ShoppingCart />);
-    expect(screen.queryByRole("complementary")).toBeInTheDocument();
-  });
-
   it("Displays heading when rendered", () => {
     render(<ShoppingCart />);
-    expect(screen.getByRole("heading")).toBeInTheDocument();
+    expect(screen.getAllByRole("heading")).toHaveLength(2);
   });
 
   it("Displays list when rendered", () => {
@@ -25,7 +20,13 @@ describe("ShoppingCart component", async () => {
 
   it("Displays list items when given an array prop when rendered", async () => {
     const cartItemsIds = ["1", "3"];
-    render(<ShoppingCart cartItemsIds={cartItemsIds} />);
+    const cartQuantities = new Map();
+    cartQuantities.set("1", 1);
+    cartQuantities.set("2", 1);
+
+    render(
+      <ShoppingCart cartItemsIds={cartItemsIds} quantities={cartQuantities} />
+    );
     expect(await screen.findAllByRole("listitem")).toHaveLength(2);
   });
 });

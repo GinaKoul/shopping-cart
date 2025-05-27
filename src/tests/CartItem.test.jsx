@@ -48,7 +48,7 @@ describe("CartItem  component", () => {
     expect(screen.getByText(cartItemProps.price)).toBeInTheDocument();
   });
 
-  it("Displays cart item add to cart button on screen when rendered and price is greater than zero", () => {
+  it("Displays cart item remove from cart button on screen when rendered and price is greater than zero", () => {
     const cartItemProps = {
       id: "1",
       title: "Item Title",
@@ -56,10 +56,10 @@ describe("CartItem  component", () => {
       image: null,
     };
     render(<CartItem {...cartItemProps} />);
-    expect(screen.queryByRole("button")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove" })).toBeInTheDocument();
   });
 
-  it("Does not display cart item price and add to cart button on screen when rendered with a price equal or smaller than zero", () => {
+  it("Does not display cart item price and remove from cart button on screen when rendered with a price equal or smaller than zero", () => {
     const cartItemProps = {
       id: "1",
       title: "Item Title",

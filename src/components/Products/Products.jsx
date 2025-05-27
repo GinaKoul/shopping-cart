@@ -1,12 +1,10 @@
-import { useOutletContext } from "react-router-dom";
 import styles from "./Products.module.css";
+import { useOutletContext } from "react-router-dom";
 import useProductData from "../../hooks/useProductData.jsx";
 import Card from "../Card/Card.jsx";
-import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 
 const Products = () => {
-  const { cartItemsIds, quantities, handleAddToCart, handleRemoveFromCart } =
-    useOutletContext();
+  const { quantities, handleAddToCart } = useOutletContext();
   const { productData, productError, productLoading } = useProductData();
 
   return (
@@ -24,17 +22,13 @@ const Products = () => {
                   id={item.id}
                   title={item.title}
                   price={item.price}
+                  quantity={quantities.get(item.id) || 1}
                   image={item.image}
                   handleAddToCart={handleAddToCart}
                 />
               ))}
           </div>
         </section>
-        <ShoppingCart
-          cartItemsIds={cartItemsIds}
-          quantities={quantities}
-          handleRemoveFromCart={handleRemoveFromCart}
-        />
       </div>
     </>
   );

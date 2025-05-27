@@ -7,11 +7,11 @@ const Card = ({
   id,
   title = "Item Title",
   price = 0.0,
+  quantity,
   image,
   handleAddToCart,
 }) => {
   const priceRound = Math.ceil(price);
-
   return (
     <article dataid={id} className={styles.card}>
       <img src={image ? image : null} className={styles.cardImg} alt="" />
@@ -21,7 +21,7 @@ const Card = ({
           <b>
             {price} <span>€</span>
           </b>
-          <Quantity id={"cardQuantity" + id} />
+          <Quantity id={"cardQuantity" + id} value={quantity} reset={true} />
           <Button label="Add To Cart" handleClick={handleAddToCart} />
         </>
       )}
@@ -30,9 +30,10 @@ const Card = ({
 };
 
 Card.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.number,
   title: PropTypes.string,
   price: PropTypes.number,
+  quantity: PropTypes.number,
   image: PropTypes.string,
   handleAddToCart: PropTypes.func,
 };

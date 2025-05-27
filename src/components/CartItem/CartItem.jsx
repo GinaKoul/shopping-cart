@@ -16,12 +16,16 @@ const CartItem = ({
   return (
     <article dataid={id} className={styles.cartItem}>
       <img src={image ? image : null} className={styles.cartItemImg} alt="" />
-      <h3>{title}</h3>
-      {priceRound > 0 && (
-        <>
-          <b>
+      <div className={styles.cartItemDetails}>
+        <h3>{title}</h3>
+        {priceRound > 0 && (
+          <b className={styles.price}>
             {price} <span>€</span>
           </b>
+        )}
+      </div>
+      {priceRound > 0 && (
+        <>
           <Quantity id={"cardQuantity" + id} value={quantity} />
           <Button label="Remove" handleClick={handleRemoveFromCart} />
         </>
@@ -31,7 +35,7 @@ const CartItem = ({
 };
 
 CartItem.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.number,
   title: PropTypes.string,
   price: PropTypes.number,
   quantity: PropTypes.number,

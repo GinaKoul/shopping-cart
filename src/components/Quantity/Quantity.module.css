@@ -1,14 +1,11 @@
 .quantityField {
-  margin-top: 16px;
-  /* display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px; */
+  gap: 16px;
 }
 
 .quantity {
-  margin-top: 16px;
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -25,4 +22,14 @@
   outline: none;
   border-width: 2px;
   border-style: solid;
+}
+
+@media (max-width: 520px) {
+  .quantityField {
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
 }

@@ -1,10 +1,14 @@
 import styles from "./Quantity.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Button from "../Button/Button.jsx";
 
-const Quantity = ({ id, value = 1 }) => {
+const Quantity = ({ id, value = 1, reset = false }) => {
   const [quantity, setQuantity] = useState(value);
+
+  useEffect(() => {
+    if (value > 1 && reset) setQuantity(1);
+  }, [value, reset]);
 
   const handleChange = (e) => {
     setQuantity(parseInt(e.target.value) || "");
@@ -40,6 +44,7 @@ const Quantity = ({ id, value = 1 }) => {
 Quantity.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.number,
+  reset: PropTypes.bool,
 };
 
 export default Quantity;
