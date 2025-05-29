@@ -48,6 +48,32 @@ describe("CartItem  component", () => {
     expect(screen.getByText(cartItemProps.price)).toBeInTheDocument();
   });
 
+  it("Displays cart item  increase quantity button on screen when rendered and price is greater than zero", () => {
+    const cartItemProps = {
+      id: "1",
+      title: "Item Title",
+      price: 10,
+      image: null,
+    };
+    render(<CartItem {...cartItemProps} />);
+    expect(
+      screen.queryByRole("button", { name: "Increase quantity" })
+    ).toBeInTheDocument();
+  });
+
+  it("Displays cart item  decrease quantity button on screen when rendered and price is greater than zero", () => {
+    const cartItemProps = {
+      id: "1",
+      title: "Item Title",
+      price: 10,
+      image: null,
+    };
+    render(<CartItem {...cartItemProps} />);
+    expect(
+      screen.queryByRole("button", { name: "Decrease quantity" })
+    ).toBeInTheDocument();
+  });
+
   it("Displays cart item remove from cart button on screen when rendered and price is greater than zero", () => {
     const cartItemProps = {
       id: "1",
@@ -59,7 +85,18 @@ describe("CartItem  component", () => {
     expect(screen.getByRole("button", { name: "Remove" })).toBeInTheDocument();
   });
 
-  it("Does not display cart item price and remove from cart button on screen when rendered with a price equal or smaller than zero", () => {
+  it("Does not display buttons on screen when rendered with a price equal or less than zero", () => {
+    const cartItemProps = {
+      id: "1",
+      title: "Item Title",
+      price: 0,
+      image: null,
+    };
+    render(<CartItem {...cartItemProps} />);
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
+  });
+
+  it("Does not display cart item price on screen when rendered with a price equal or smaller than zero", () => {
     const cartItemProps = {
       id: "1",
       title: "Item Title",
@@ -68,6 +105,5 @@ describe("CartItem  component", () => {
     };
     render(<CartItem {...cartItemProps} />);
     expect(screen.queryByText(cartItemProps.price)).not.toBeInTheDocument();
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });

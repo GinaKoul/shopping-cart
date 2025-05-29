@@ -3,8 +3,13 @@ import { useOutletContext } from "react-router-dom";
 import ShoppingCart from "../ShoppingCart/ShoppingCart.jsx";
 
 const Checkout = () => {
-  const { cartItemsIds, quantities, handleRemoveFromCart, handleCartReset } =
-    useOutletContext();
+  const {
+    cartItemsIds,
+    quantities,
+    handleRemoveFromCart,
+    handleQuantityUpdate,
+    handleCartReset,
+  } = useOutletContext();
 
   return (
     <article>
@@ -13,6 +18,7 @@ const Checkout = () => {
         cartItemsIds={cartItemsIds}
         quantities={quantities}
         handleRemoveFromCart={handleRemoveFromCart}
+        handleQuantityUpdate={handleQuantityUpdate}
         handleCartReset={handleCartReset}
       />
     </article>

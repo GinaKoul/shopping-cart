@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import Button from "../components/Button/Button.jsx";
 
 describe("Button component", () => {
@@ -16,22 +16,21 @@ describe("Button component", () => {
     expect(screen.getByRole("button").textContent).toMatch(buttonProps.label);
   });
 
-  //   it("should call the onClick function when clicked", async () => {
-  //   const onClick = vi.fn();
-  //   const user = userEvent.setup()
-  //   render(<CustomButton onClick={onClick} />);
+  it("should call the onClick function when clicked", async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
 
-  //   const button = screen.getByRole("button", { name: "Click me" });
+    render(<Button handleClick={onClick} />);
 
-  //   await user.click(button);
+    await user.click(screen.getByRole("button"));
 
-  //   expect(onClick).toHaveBeenCalled();
-  // });
+    expect(onClick).toHaveBeenCalled();
+  });
 
-  // it("should not call the onClick function when it isn't clicked", async () => {
-  //   const onClick = vi.fn();
-  //   render(<CustomButton onClick={onClick} />);
+  it("should not call the onClick function when it isn't clicked", async () => {
+    const onClick = vi.fn();
+    render(<Button handleClick={onClick} />);
 
-  //   expect(onClick).not.toHaveBeenCalled();
-  // });
+    expect(onClick).not.toHaveBeenCalled();
+  });
 });

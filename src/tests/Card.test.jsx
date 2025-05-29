@@ -67,10 +67,12 @@ describe("Card component", () => {
       image: null,
     };
     render(<Card {...cardProps} />);
-    expect(screen.queryByRole("button", { name: "+" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Increase quantity" })
+    ).toBeInTheDocument();
   });
 
-    it("Displays card decrease quantity button on screen when rendered and price is greater than zero", () => {
+  it("Displays card decrease quantity button on screen when rendered and price is greater than zero", () => {
     const cardProps = {
       id: "1",
       title: "Item Title",
@@ -78,21 +80,23 @@ describe("Card component", () => {
       image: null,
     };
     render(<Card {...cardProps} />);
-    expect(screen.queryByRole("button", { name: "-" })).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Decrease quantity" })
+    ).toBeInTheDocument();
   });
 
-      it("Displays card increase quantity button on screen when rendered and price is greater than zero", () => {
+  it("Does not display buttons on screen when rendered and price is 0", () => {
     const cardProps = {
       id: "1",
       title: "Item Title",
-      price: 10,
+      price: 0,
       image: null,
     };
     render(<Card {...cardProps} />);
-    expect(screen.queryByRole("button", { name: "+" })).toBeInTheDocument();
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
   });
 
-  it("Does not display card price and add to cart button on screen when rendered with a price equal or smaller than zero", () => {
+  it("Does not display card price on screen when rendered with a price equal or less than zero", () => {
     const cardProps = {
       id: "1",
       title: "Item Title",
@@ -101,6 +105,5 @@ describe("Card component", () => {
     };
     render(<Card {...cardProps} />);
     expect(screen.queryByText(cardProps.price)).not.toBeInTheDocument();
-    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });

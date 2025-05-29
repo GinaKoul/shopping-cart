@@ -10,6 +10,7 @@ const CartItem = ({
   quantity = 1,
   image,
   handleRemoveFromCart,
+  handleQuantityUpdate,
 }) => {
   const priceRound = Math.ceil(price);
 
@@ -26,7 +27,7 @@ const CartItem = ({
       </div>
       {priceRound > 0 && (
         <>
-          <Quantity id={"cardQuantity" + id} value={quantity} />
+          <Quantity id={"cardQuantity" + id} value={quantity} handleQuantityUpdate={handleQuantityUpdate} />
           <Button label="Remove" handleClick={handleRemoveFromCart} />
         </>
       )}

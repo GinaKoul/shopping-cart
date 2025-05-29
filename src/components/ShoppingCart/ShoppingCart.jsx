@@ -8,6 +8,7 @@ const ShoppingCart = ({
   cartItemsIds = [],
   quantities,
   handleRemoveFromCart,
+  handleQuantityUpdate,
   handleCartReset,
 }) => {
   const { cartData, cartError, cartLoading } = useCartData(cartItemsIds);
@@ -34,6 +35,7 @@ const ShoppingCart = ({
                   quantity={quantities.get(item.id) || 1}
                   image={item.image}
                   handleRemoveFromCart={handleRemoveFromCart}
+                  handleQuantityUpdate={handleQuantityUpdate}
                 />
               </li>
             ))}

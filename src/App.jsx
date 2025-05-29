@@ -1,6 +1,6 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Header from "./components/Header/Header.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 
@@ -33,6 +33,19 @@ const App = () => {
     setQuantities(newMap);
   };
 
+  const handleQuantityUpdate = useCallback((component) => {
+    const card = component.closest("article");
+    const addedItem = Number(card.getAttribute("dataid"));
+    const itemQuantity = card.querySelector("input");
+
+    setQuantities(
+      new Map(quantities).set(
+        addedItem,
+        itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
+      )
+    );
+  }, []);
+
   const handleCartReset = () => {
     setCartItemsIds([]);
     setQuantities(new Map());
@@ -56,6 +69,7 @@ const App = () => {
             quantities,
             handleAddToCart,
             handleRemoveFromCart,
+            handleQuantityUpdate,
             handleCartReset,
           }}
         />
