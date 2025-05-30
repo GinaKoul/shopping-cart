@@ -9,6 +9,7 @@ const Card = ({
   price = 0.0,
   quantity,
   image,
+  isInCart,
   handleAddToCart,
 }) => {
   const priceRound = Math.ceil(price);
@@ -18,11 +19,21 @@ const Card = ({
       <h3>{title}</h3>
       {priceRound > 0 && (
         <>
-          <b>
+          <b className={styles.price}>
             {price} <span>€</span>
           </b>
-          <Quantity id={"cardQuantity" + id} value={quantity} reset={true} />
-          <Button label="Add To Cart" handleClick={handleAddToCart} />
+          {isInCart && <p>Product is added to Cart</p>}
+          {!isInCart && (
+            <>
+              <Quantity
+                id={"cardQuantity" + id}
+                className={styles.cardQuantity}
+                value={quantity}
+                reset={true}
+              />
+              <Button label="Add To Cart" handleClick={handleAddToCart} />
+            </>
+          )}
         </>
       )}
     </article>

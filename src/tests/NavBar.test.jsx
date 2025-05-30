@@ -10,6 +10,6 @@ describe("NavBar component", () => {
 
   it("display no navigation bar children when rendered with empty array prop", () => {
     render(<NavBar items={[]} />);
-    expect(screen.getByRole("navigation").children).toHaveLength(0);
+    expect(screen.queryAllByRole("link")).toHaveLength(0);
   });
 });

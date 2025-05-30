@@ -1,9 +1,3 @@
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 24px;
-}
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

@@ -1,7 +1,9 @@
 .card {
   padding: 16px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(104, 80, 80, 0.2) 0px 2px 8px 0px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cardImg {
@@ -10,6 +12,21 @@
   object-fit: cover;
 }
 
-.card button {
-  margin: 32px auto 24px auto;
+.price {
+  display: block;
+  margin-bottom: auto;
+  padding-bottom: 16px;
+  margin-left: auto;
+  font-size: 18px;
+}
+
+.card p {
+  margin: auto;
+  padding-bottom: 24px;
+  font-weight: 500;
+}
+
+.card > button {
+  width: 100%;
+  margin: 32px 0 24px 0;
 }

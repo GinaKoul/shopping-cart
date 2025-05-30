@@ -1,5 +1,5 @@
 import { vi, describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Button from "../components/Button/Button.jsx";
 
@@ -24,7 +24,7 @@ describe("Button component", () => {
 
     await user.click(screen.getByRole("button"));
 
-    expect(onClick).toHaveBeenCalled();
+    waitFor(() => expect(onClick).toHaveBeenCalled());
   });
 
   it("should not call the onClick function when it isn't clicked", async () => {

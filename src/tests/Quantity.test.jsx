@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Quantity from "../components/Quantity/Quantity.jsx";
 
@@ -21,7 +21,7 @@ describe("Quantity component", () => {
 
     await user.click(screen.getByRole("button", { name: "Decrease quantity" }));
 
-    expect(screen.getByRole("textbox")).toHaveValue("1");
+    waitFor(() => expect(screen.findByRole("textbox")).toHaveValue("1"));
   });
 
   it("Increase button should increase quantity when clicked", async () => {
@@ -31,7 +31,7 @@ describe("Quantity component", () => {
 
     await user.click(screen.getByRole("button", { name: "Increase quantity" }));
 
-    expect(screen.getByRole("textbox")).toHaveValue("2");
+    waitFor(() => expect(screen.findByRole("textbox")).toHaveValue("2"));
   });
 
   it("Increase and decrease buttons are handling quantity correctly when clicked", async () => {
@@ -42,11 +42,11 @@ describe("Quantity component", () => {
     await user.click(screen.getByRole("button", { name: "Increase quantity" }));
     await user.click(screen.getByRole("button", { name: "Increase quantity" }));
 
-    expect(screen.getByRole("textbox")).toHaveValue("3");
+    waitFor(() => expect(screen.findByRole("textbox")).toHaveValue("3"));
 
     await user.click(screen.getByRole("button", { name: "Decrease quantity" }));
 
-    expect(screen.getByRole("textbox")).toHaveValue("2");
+    waitFor(() => expect(screen.findByRole("textbox")).toHaveValue("2"));
   });
 
   it("Should not call the onClick function when buttons are not clicked", async () => {

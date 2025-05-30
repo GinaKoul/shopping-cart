@@ -1,13 +1,59 @@
-.nav {
-  width: fit-content;
+.summary {
+  composes: secondaryOutline from "../colors.module.css";
+  cursor: pointer;
+  position: relative;
+  outline-width: 2px;
+  outline-style: solid;
+  list-style-type: none;
+  transition: transform 200ms ease-in-out 0s;
+}
+
+.summary::after {
+  position: absolute;
+  content: "";
+  border-left: solid 8px transparent;
+  border-top: solid 8px currentColor;
+  border-right: solid 8px transparent;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  transition: transform 200ms ease-in-out 0s;
+}
+
+.details[open] summary::after {
+  transform: translateY(-50%) scaleY(-1);
+}
+
+.details::details-content {
+  opacity: 0;
+  block-size: 0;
+  overflow-y: clip;
+  transition: content-visibility 1s allow-discrete, opacity 1s, block-size 1s;
+}
+
+.details[open]::details-content {
+  opacity: 1;
+  block-size: auto;
+}
+
+.nav ul {
+  list-style-type: none;
+  padding-inline-start: 0;
 }
 
 .link {
-  composes: secondaryColor from "../colors.module.css";
-  padding: 0 8px;
+  composes: primaryColor from "../colors.module.css";
+  display: block;
+  margin-bottom: 16px;
 }
 
 .link:hover,
 .link:focus {
   text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details {
+    interpolate-size: allow-keywords;
+  }
 }

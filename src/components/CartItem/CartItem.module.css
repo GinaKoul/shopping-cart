@@ -19,10 +19,6 @@
   margin-top: 0;
 }
 
-.price {
-  font-size: 20px;
-}
-
 @media (max-width: 520px) {
   .cartItemDetails {
     margin-top: 16px;

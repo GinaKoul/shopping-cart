@@ -20,14 +20,19 @@ const CartItem = ({
       <div className={styles.cartItemDetails}>
         <h3>{title}</h3>
         {priceRound > 0 && (
-          <b className={styles.price}>
+          <b className="price">
             {price} <span>€</span>
           </b>
         )}
       </div>
       {priceRound > 0 && (
         <>
-          <Quantity id={"cardQuantity" + id} value={quantity} handleQuantityUpdate={handleQuantityUpdate} />
+          <Quantity
+            type="cartItemQuantity"
+            id={"cardQuantity" + id}
+            value={quantity}
+            handleQuantityUpdate={handleQuantityUpdate}
+          />
           <Button label="Remove" handleClick={handleRemoveFromCart} />
         </>
       )}
@@ -42,6 +47,7 @@ CartItem.propTypes = {
   quantity: PropTypes.number,
   image: PropTypes.string,
   handleRemoveFromCart: PropTypes.func,
+  handleQuantityUpdate: PropTypes.func,
 };
 
 export default CartItem;

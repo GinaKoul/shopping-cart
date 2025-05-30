@@ -1,13 +1,29 @@
-.quantityField {
+.defaultQuantity,
+.cartItemQuantity {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 16px;
+  font-weight: 500;
+}
+
+.defaultQuantity {
+  justify-content: space-between;
+}
+
+.defaultQuantity .quantity {
+  margin-top: 8px;
+}
+
+.cartItemQuantity {
+  justify-content: center;
+}
+
+.cartItemQuantity .quantity {
+  justify-content: center;
 }
 
 .quantity {
   display: flex;
-  justify-content: center;
   align-items: stretch;
 }
 
@@ -25,7 +41,7 @@
 }
 
 @media (max-width: 520px) {
-  .quantityField {
+  .cartItemQuantity {
     flex: 0 0 100%;
     flex-wrap: wrap;
     justify-content: space-between;

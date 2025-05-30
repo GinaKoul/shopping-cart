@@ -3,7 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Button from "../Button/Button.jsx";
 
-const Quantity = ({ id, value = 1, reset = false, handleQuantityUpdate }) => {
+const Quantity = ({
+  type = "defaultQuantity",
+  id,
+  value = 1,
+  reset = false,
+  handleQuantityUpdate,
+}) => {
   const [quantity, setQuantity] = useState(value);
   const componentRef = useRef();
 
@@ -31,7 +37,7 @@ const Quantity = ({ id, value = 1, reset = false, handleQuantityUpdate }) => {
   };
 
   return (
-    <div ref={componentRef} className={styles.quantityField}>
+    <div ref={componentRef} className={styles[type]}>
       <label htmlFor={id}>Quantity</label>
       <div className={styles.quantity}>
         <Button
@@ -62,6 +68,7 @@ Quantity.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.number,
   reset: PropTypes.bool,
+  handleQuantityUpdate: PropTypes.func,
 };
 
 export default Quantity;

@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.css";
 import { Outlet } from "react-router-dom";
 import { useState, useCallback } from "react";
 import Header from "./components/Header/Header.jsx";
@@ -38,7 +38,7 @@ const App = () => {
     const addedItem = Number(card.getAttribute("dataid"));
     const itemQuantity = card.querySelector("input");
 
-    setQuantities(
+    setQuantities((quantities) =>
       new Map(quantities).set(
         addedItem,
         itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
@@ -53,16 +53,17 @@ const App = () => {
 
   return (
     <>
-      <Header>
-        <NavBar
-          items={[
-            { url: "/", name: "Homepage" },
-            { url: "/products", name: "Products" },
-            { url: "/checkout", name: "Checkout" },
-          ]}
-        />
-      </Header>
-      <main>
+      <Header />
+      <main className={styles.main}>
+        <aside className={styles.aside}>
+          <NavBar
+            items={[
+              { url: "/", name: "Homepage" },
+              { url: "/products", name: "Products" },
+              { url: "/checkout", name: "Checkout" },
+            ]}
+          />
+        </aside>
         <Outlet
           context={{
             cartItemsIds,

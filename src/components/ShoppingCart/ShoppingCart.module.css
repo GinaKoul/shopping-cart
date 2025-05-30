@@ -9,3 +9,14 @@
   list-style: none;
   padding-inline-start: 0;
 }
+
+.checkout {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.checkout button {
+  margin-left: auto;
+}

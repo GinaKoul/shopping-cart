@@ -41,12 +41,12 @@ const ShoppingCart = ({
             ))}
         </ul>
       </section>
-      <section>
+      <section className={styles.checkout}>
         <h3>Total</h3>
-        <b>
+        <b className="price">
           {total.toFixed(2)} <span>€</span>
         </b>
-        <Button label="Checkout" handleClick={handleCartReset} />
+        <Button label="Buy Products" handleClick={handleCartReset} />
       </section>
     </>
   );
@@ -58,6 +58,7 @@ ShoppingCart.propTypes = {
   ),
   quantities: PropTypes.objectOf(PropTypes.number),
   handleRemoveFromCart: PropTypes.func,
+  handleQuantityUpdate: PropTypes.func,
 };
 
 export default ShoppingCart;
