@@ -53,14 +53,14 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header cartItemsCount={cartItemsIds.length} />
       <main className={styles.main}>
         <aside className={styles.aside}>
           <NavBar
             items={[
               { url: "/", name: "Homepage" },
               { url: "/products", name: "Products" },
-              { url: "/checkout", name: "Checkout" },
+              { url: "/checkout", name: "My Cart" },
             ]}
           />
         </aside>

@@ -7,14 +7,49 @@
 .headerContainer {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 
 .header h1 {
   width: fit-content;
   margin: 0;
+}
+.headerCart {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.cartIcon {
+  position: relative;
+}
+
+.cartIcon svg {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+}
+
+.cartItemsCounter {
+  composes: primaryColor from "../colors.module.css";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-weight: 500;
+  background-color: #b8d2b3;
+  transform: translate(50%, -50%);
+}
+
+.headerBtn {
+  composes: secondaryBtn from "../colors.module.css";
 }

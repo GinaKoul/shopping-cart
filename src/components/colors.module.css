@@ -44,3 +44,16 @@
   background-color: #b8d2b3;
   border-color: #647a67;
 }
+
+.secondaryBtn {
+  background-color: #fefefe;
+  border-color: #fefefe;
+  color: #647a67;
+}
+
+.secondaryBtn:hover,
+.secondaryBtn:focus {
+  background-color: #647a67;
+  border-color: #fefefe;
+  color: #fefefe;
+}

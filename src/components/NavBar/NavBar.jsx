@@ -26,19 +26,6 @@ const NavBar = ({ items }) => {
         </ul>
       </details>
     </nav>
-    // <details>
-    //   <summary className={styles.summary}>
-    //     <h2>Menu</h2>
-    //   </summary>
-    //   <nav className={styles.nav}>
-    //     {items &&
-    //       items.map((item) => (
-    //         <Link key={item.name} to={item.url} className={styles.link}>
-    //           {item.name}
-    //         </Link>
-    //       ))}
-    //   </nav>
-    // </details>
   );
 };
 
