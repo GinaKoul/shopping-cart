@@ -12,9 +12,6 @@ const Header = ({ title = "My Store", showHeaderCart, cartItemsCount }) => {
           <div className={styles.headerCart}>
             <div className={styles.cartIcon}>
               <Icon id="cart" width="32" height="32" />
-              {/* <svg>
-                <use xlinkHref="src/assets/main-v2.svg#cart" />
-              </svg> */}
               <span className={styles.cartItemsCounter}>{cartItemsCount}</span>
             </div>
             <Link to="/checkout" className={"button " + styles.headerBtn}>
