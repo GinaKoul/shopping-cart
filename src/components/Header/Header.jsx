@@ -1,6 +1,7 @@
 import styles from "./Header.module.css";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Icon from "../Icon/Icon.jsx";
 
 const Header = ({ title = "My Store", showHeaderCart, cartItemsCount }) => {
   return (
@@ -10,9 +11,10 @@ const Header = ({ title = "My Store", showHeaderCart, cartItemsCount }) => {
         {showHeaderCart && (
           <div className={styles.headerCart}>
             <div className={styles.cartIcon}>
-              <svg>
+              <Icon id="cart" width="32" height="32" />
+              {/* <svg>
                 <use xlinkHref="src/assets/main-v2.svg#cart" />
-              </svg>
+              </svg> */}
               <span className={styles.cartItemsCounter}>{cartItemsCount}</span>
             </div>
             <Link to="/checkout" className={"button " + styles.headerBtn}>
