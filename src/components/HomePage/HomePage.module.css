@@ -1,0 +1,17 @@
+.homeFigure {
+  margin: 0;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (min-width: 921px) {
+  .homeSection {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+  }
+}

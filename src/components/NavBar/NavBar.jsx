@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
+import isMobile from "../../functions/isMobile";
 
 const NavBar = ({ items }) => {
   return (
     <nav aria-label="Main navigation" className={styles.nav}>
-      <details id="nav-menu" className={styles.details}>
+      <details id="nav-menu" open={!isMobile()} className={styles.details}>
         <summary
           tabIndex="0"
           aria-controls="nav-links"

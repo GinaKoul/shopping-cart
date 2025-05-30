@@ -11,12 +11,32 @@
 }
 
 .checkout {
-  margin-top: 48px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
+}
+
+.checkout .price {
+  flex-shrink: 0;
 }
 
 .checkout button {
   margin-left: auto;
+}
+
+@media (max-width: 520px) {
+  .checkout {
+    margin-top: 32px;
+    justify-content: center;
+  }
+  .checkout button {
+    flex: 0 0 100%;
+  }
+}
+
+@media (min-width: 520px) {
+  .checkout {
+    margin-top: 48px;
+  }
 }

@@ -1,5 +1,5 @@
 import styles from "./App.module.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState, useCallback } from "react";
 import Header from "./components/Header/Header.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -7,6 +7,9 @@ import NavBar from "./components/NavBar/NavBar.jsx";
 const App = () => {
   const [cartItemsIds, setCartItemsIds] = useState([]);
   const [quantities, setQuantities] = useState(new Map());
+
+  const location = useLocation();
+  const showHeaderCart = location.pathname.startsWith("/products");
 
   const handleAddToCart = (e) => {
     const card = e.target.closest("article");
@@ -53,7 +56,10 @@ const App = () => {
 
   return (
     <>
-      <Header cartItemsCount={cartItemsIds.length} />
+      <Header
+        showHeaderCart={showHeaderCart}
+        cartItemsCount={cartItemsIds.length}
+      />
       <main className={styles.main}>
         <aside className={styles.aside}>
           <NavBar
@@ -75,6 +81,7 @@ const App = () => {
           }}
         />
       </main>
+      <footer className={styles.footer}>&copy; Gina Kouliaki</footer>
     </>
   );
 };
