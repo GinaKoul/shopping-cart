@@ -11,30 +11,36 @@ const App = () => {
   const location = useLocation();
   const showHeaderCart = location.pathname.startsWith("/products");
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = useCallback((e) => {
     const card = e.target.closest("article");
     const addedItem = Number(card.getAttribute("dataid"));
-    if (!cartItemsIds.includes(addedItem)) {
-      const itemQuantity = card.querySelector("input");
-      setCartItemsIds([...cartItemsIds, addedItem]);
-      setQuantities(
-        new Map(quantities).set(
-          addedItem,
-          itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
-        )
-      );
-    }
-  };
+    const itemQuantity = card.querySelector("input");
+    setCartItemsIds((cartItemsIds) =>
+      cartItemsIds.includes(addedItem)
+        ? cartItemsIds
+        : [...cartItemsIds, addedItem]
+    );
+    setQuantities((quantities) =>
+      new Map(quantities).set(
+        addedItem,
+        itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
+      )
+    );
+  }, []);
 
-  const handleRemoveFromCart = (e) => {
+  const handleRemoveFromCart = useCallback((e) => {
     const removedItemId = Number(
       e.target.closest("article").getAttribute("dataid")
     );
-    setCartItemsIds(cartItemsIds.filter((item) => item !== removedItemId));
-    const newMap = new Map(quantities);
-    newMap.delete(removedItemId);
-    setQuantities(newMap);
-  };
+    setCartItemsIds((cartItemsIds) =>
+      cartItemsIds.filter((item) => item !== removedItemId)
+    );
+    setQuantities((quantities) => {
+      const newMap = new Map(quantities);
+      newMap.delete(removedItemId);
+      return newMap;
+    });
+  }, []);
 
   const handleQuantityUpdate = useCallback((component) => {
     const card = component.closest("article");
@@ -49,10 +55,10 @@ const App = () => {
     );
   }, []);
 
-  const handleCartReset = () => {
+  const handleCartReset = useCallback(() => {
     setCartItemsIds([]);
     setQuantities(new Map());
-  };
+  }, []);
 
   return (
     <>
