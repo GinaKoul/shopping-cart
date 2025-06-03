@@ -1,5 +1,7 @@
 .summary {
+  composes: primaryColor from "../colors.module.css";
   composes: secondaryOutline from "../colors.module.css";
+  border-radius: 8px;
   cursor: pointer;
   position: relative;
   outline-width: 2px;
