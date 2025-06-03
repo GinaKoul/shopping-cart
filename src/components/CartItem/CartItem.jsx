@@ -1,4 +1,5 @@
 import styles from "./CartItem.module.css";
+import { useOutletContext } from "react-router-dom";
 import PropTypes from "prop-types";
 import Quantity from "../Quantity/Quantity.jsx";
 import Button from "../Button/Button.jsx";
@@ -9,9 +10,8 @@ const CartItem = ({
   price = 0.0,
   quantity = 1,
   image,
-  handleRemoveFromCart,
-  handleQuantityUpdate,
 }) => {
+  const { handleRemoveFromCart, handleQuantityUpdate } = useOutletContext();
   const priceRound = Math.ceil(price);
 
   return (
@@ -46,8 +46,6 @@ CartItem.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
   image: PropTypes.string,
-  handleRemoveFromCart: PropTypes.func,
-  handleQuantityUpdate: PropTypes.func,
 };
 
 export default CartItem;

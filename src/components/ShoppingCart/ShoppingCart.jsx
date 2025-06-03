@@ -1,16 +1,11 @@
-import PropTypes from "prop-types";
 import styles from "./ShoppingCart.module.css";
+import { useOutletContext } from "react-router-dom";
 import useCartData from "../../hooks/useCartData.jsx";
 import CartItem from "../CartItem/CartItem";
 import Button from "../Button/Button.jsx";
 
-const ShoppingCart = ({
-  cartItemsIds = [],
-  quantities,
-  handleRemoveFromCart,
-  handleQuantityUpdate,
-  handleCartReset,
-}) => {
+const ShoppingCart = () => {
+  const { cartItemsIds, quantities, handleCartReset } = useOutletContext();
   const { cartData, cartError, cartLoading } = useCartData(cartItemsIds);
 
   const total = cartData.reduce(
@@ -34,8 +29,6 @@ const ShoppingCart = ({
                   price={item.price}
                   quantity={quantities.get(item.id) || 1}
                   image={item.image}
-                  handleRemoveFromCart={handleRemoveFromCart}
-                  handleQuantityUpdate={handleQuantityUpdate}
                 />
               </li>
             ))}
@@ -50,15 +43,6 @@ const ShoppingCart = ({
       </section>
     </>
   );
-};
-
-ShoppingCart.propTypes = {
-  cartItemsIds: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  quantities: PropTypes.objectOf(PropTypes.number),
-  handleRemoveFromCart: PropTypes.func,
-  handleQuantityUpdate: PropTypes.func,
 };
 
 export default ShoppingCart;

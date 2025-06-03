@@ -1,15 +1,24 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import RouterComponent from "./RouterComponent.jsx";
 import CartItem from "../components/CartItem/CartItem.jsx";
 
 describe("CartItem  component", () => {
   it("Displays article cart item when rendered", () => {
-    render(<CartItem />);
+    render(
+      <RouterComponent>
+        <CartItem />
+      </RouterComponent>
+    );
     expect(screen.getByRole("article")).toBeInTheDocument();
   });
 
   it("Displays default cart item title on screen when rendered without title prop given", () => {
-    render(<CartItem />);
+    render(
+      <RouterComponent>
+        <CartItem />
+      </RouterComponent>
+    );
     expect(screen.getByRole("heading")).toBeInTheDocument();
   });
 
@@ -20,7 +29,11 @@ describe("CartItem  component", () => {
       price: 10,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(screen.getByRole("heading")).toBeInTheDocument();
   });
 
@@ -31,7 +44,11 @@ describe("CartItem  component", () => {
       price: 10,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(screen.getByRole("heading").textContent).toMatch(
       cartItemProps.title
     );
@@ -44,7 +61,11 @@ describe("CartItem  component", () => {
       price: 10,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(screen.getByText(cartItemProps.price)).toBeInTheDocument();
   });
 
@@ -55,7 +76,11 @@ describe("CartItem  component", () => {
       price: 10,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(
       screen.queryByRole("button", { name: "Increase quantity" })
     ).toBeInTheDocument();
@@ -68,7 +93,11 @@ describe("CartItem  component", () => {
       price: 10,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(
       screen.queryByRole("button", { name: "Decrease quantity" })
     ).toBeInTheDocument();
@@ -81,7 +110,11 @@ describe("CartItem  component", () => {
       price: 10,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(screen.getByRole("button", { name: "Remove" })).toBeInTheDocument();
   });
 
@@ -92,7 +125,11 @@ describe("CartItem  component", () => {
       price: 0,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(screen.queryAllByRole("button")).toHaveLength(0);
   });
 
@@ -103,7 +140,11 @@ describe("CartItem  component", () => {
       price: 0,
       image: null,
     };
-    render(<CartItem {...cartItemProps} />);
+    render(
+      <RouterComponent>
+        <CartItem {...cartItemProps} />
+      </RouterComponent>
+    );
     expect(screen.queryByText(cartItemProps.price)).not.toBeInTheDocument();
   });
 });

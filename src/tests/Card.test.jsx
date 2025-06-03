@@ -1,15 +1,24 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import RouterComponent from "./RouterComponent.jsx";
 import Card from "../components/Card/Card.jsx";
 
 describe("Card component", () => {
   it("Displays article card when rendered", () => {
-    render(<Card />);
+    render(
+      <RouterComponent>
+        <Card />
+      </RouterComponent>
+    );
     expect(screen.getByRole("article")).toBeInTheDocument();
   });
 
   it("Displays default card title on screen when rendered without title prop given", () => {
-    render(<Card />);
+    render(
+      <RouterComponent>
+        <Card />
+      </RouterComponent>
+    );
     expect(screen.getByRole("heading")).toBeInTheDocument();
   });
 
@@ -20,7 +29,11 @@ describe("Card component", () => {
       price: 10,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(screen.getByRole("heading")).toBeInTheDocument();
   });
 
@@ -31,7 +44,11 @@ describe("Card component", () => {
       price: 10,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(screen.getByRole("heading").textContent).toMatch(cardProps.title);
   });
 
@@ -42,7 +59,11 @@ describe("Card component", () => {
       price: 10,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(screen.getByText(cardProps.price)).toBeInTheDocument();
   });
 
@@ -53,7 +74,11 @@ describe("Card component", () => {
       price: 10,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(
       screen.queryByRole("button", { name: "Add To Cart" })
     ).toBeInTheDocument();
@@ -66,7 +91,11 @@ describe("Card component", () => {
       price: 10,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(
       screen.queryByRole("button", { name: "Increase quantity" })
     ).toBeInTheDocument();
@@ -79,7 +108,11 @@ describe("Card component", () => {
       price: 10,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(
       screen.queryByRole("button", { name: "Decrease quantity" })
     ).toBeInTheDocument();
@@ -92,7 +125,11 @@ describe("Card component", () => {
       price: 0,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(screen.queryAllByRole("button")).toHaveLength(0);
   });
 
@@ -103,7 +140,11 @@ describe("Card component", () => {
       price: 0,
       image: null,
     };
-    render(<Card {...cardProps} />);
+    render(
+      <RouterComponent>
+        <Card {...cardProps} />
+      </RouterComponent>
+    );
     expect(screen.queryByText(cardProps.price)).not.toBeInTheDocument();
   });
 });

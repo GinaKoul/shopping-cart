@@ -1,15 +1,14 @@
-import styles from "./App.module.css";
-import { Outlet, useLocation } from "react-router-dom";
 import { useState, useCallback, useMemo } from "react";
-import Header from "./components/Header/Header.jsx";
-import NavBar from "./components/NavBar/NavBar.jsx";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { OutletContextProvider } from "./OutletContextProvider";
 
-const App = () => {
-  const [cartItemsIds, setCartItemsIds] = useState([]);
-  const [quantities, setQuantities] = useState(new Map());
-
-  const location = useLocation();
-  const showHeaderCart = location.pathname.startsWith("/products");
+const RouterComponent = ({
+  cartIds = [],
+  cartQuantities = new Map(),
+  children,
+}) => {
+  const [cartItemsIds, setCartItemsIds] = useState(cartIds);
+  const [quantities, setQuantities] = useState(cartQuantities);
 
   const handleAddToCart = useCallback((e) => {
     const card = e.target.closest("article");
@@ -60,7 +59,7 @@ const App = () => {
     setQuantities(new Map());
   }, []);
 
-  const outletValue = useMemo(
+  const mockContext = useMemo(
     () => ({
       cartItemsIds,
       quantities,
@@ -79,36 +78,14 @@ const App = () => {
     ]
   );
   return (
-    <>
-      <Header
-        showHeaderCart={showHeaderCart}
-        cartItemsCount={cartItemsIds.length}
-      />
-      <main className={styles.main}>
-        <aside className={styles.aside}>
-          <NavBar
-            items={[
-              { url: "/", name: "Homepage" },
-              { url: "/products", name: "Products" },
-              { url: "/checkout", name: "My Cart" },
-            ]}
-          />
-        </aside>
-        <Outlet
-          // context={{
-          //   cartItemsIds,
-          //   quantities,
-          //   handleAddToCart,
-          //   handleRemoveFromCart,
-          //   handleQuantityUpdate,
-          //   handleCartReset,
-          // }}
-          context={outletValue}
-        />
-      </main>
-      <footer className={styles.footer}>&copy; Gina Kouliaki</footer>
-    </>
+    <MemoryRouter initialEntries={["/"]}>
+      <Routes>
+        <Route element={<OutletContextProvider context={mockContext} />}>
+          <Route path="/" element={children} />
+        </Route>
+      </Routes>
+    </MemoryRouter>
   );
 };
 
-export default App;
+export default RouterComponent;

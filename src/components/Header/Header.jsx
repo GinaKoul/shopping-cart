@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Icon from "../Icon/Icon.jsx";
 
 const Header = ({ title = "My Store", showHeaderCart, cartItemsCount }) => {

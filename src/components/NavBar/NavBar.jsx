@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import isMobile from "../../functions/isMobile";
 
 const NavBar = ({ items }) => {
