@@ -73,6 +73,15 @@ const App = () => {
       handleCartReset,
     ]
   );
+
+  const navigationLinks = useMemo(
+    () => [
+      { url: "/", name: "Homepage" },
+      { url: "/products", name: "Products" },
+      { url: "/checkout", name: "My Cart" },
+    ],
+    []
+  );
   return (
     <>
       <Header
@@ -81,13 +90,7 @@ const App = () => {
       />
       <main className={styles.main}>
         <aside className={styles.aside}>
-          <NavBar
-            items={[
-              { url: "/", name: "Homepage" },
-              { url: "/products", name: "Products" },
-              { url: "/checkout", name: "My Cart" },
-            ]}
-          />
+          <NavBar items={navigationLinks} />
         </aside>
         <Outlet context={outletValue} />
       </main>

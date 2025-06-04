@@ -4,7 +4,7 @@ import useProductData from "../../hooks/useProductData.jsx";
 import Card from "../Card/Card.jsx";
 
 const Products = () => {
-  const { cartItemsIds } = useOutletContext();
+  const { cartItemsIds, quantities, handleAddToCart } = useOutletContext();
   const { productData, productError, productLoading } = useProductData();
 
   return (
@@ -20,8 +20,10 @@ const Products = () => {
               id={item.id}
               title={item.title}
               price={item.price}
+              quantity={quantities.get(item.id) || 1}
               image={item.image}
               isInCart={cartItemsIds.includes(item.id)}
+              handleAddToCart={handleAddToCart}
             />
           ))}
       </div>

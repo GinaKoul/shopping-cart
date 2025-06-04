@@ -1,0 +1,10 @@
+.link {
+  composes: primaryColor from "../colors.module.css";
+  display: block;
+  margin-bottom: 16px;
+}
+
+.link:hover,
+.link:focus {
+  text-decoration: underline;
+}

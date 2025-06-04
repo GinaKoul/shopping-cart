@@ -1,9 +1,10 @@
 import styles from "./NavBar.module.css";
-import { Link } from "react-router-dom";
+import { memo } from "react";
 import PropTypes from "prop-types";
+import LinkListItem from "../LinkListItem/LinkListItem.jsx";
 import isMobile from "../../functions/isMobile";
 
-const NavBar = ({ items }) => {
+const NavBar = memo(({ items }) => {
   return (
     <nav aria-label="Main navigation" className={styles.nav}>
       <details id="nav-menu" open={!isMobile()} className={styles.details}>
@@ -18,17 +19,15 @@ const NavBar = ({ items }) => {
         <ul id="nav-links" role="menu">
           {items &&
             items.map((item) => (
-              <li key={item.name} role="none">
-                <Link to={item.url} className={styles.link} role="menuitem">
-                  {item.name}
-                </Link>
-              </li>
+              <LinkListItem key={item.name} url={item.url}>
+                {item.name}
+              </LinkListItem>
             ))}
         </ul>
       </details>
     </nav>
   );
-};
+});
 
 NavBar.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),

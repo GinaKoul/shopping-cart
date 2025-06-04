@@ -1,16 +1,27 @@
 import styles from "./ShoppingCart.module.css";
 import { useOutletContext } from "react-router-dom";
+import { useMemo } from "react";
 import useCartData from "../../hooks/useCartData.jsx";
 import CartItem from "../CartItem/CartItem";
 import Button from "../Button/Button.jsx";
 
 const ShoppingCart = () => {
-  const { cartItemsIds, quantities, handleCartReset } = useOutletContext();
+  const {
+    cartItemsIds,
+    quantities,
+    handleRemoveFromCart,
+    handleQuantityUpdate,
+    handleCartReset,
+  } = useOutletContext();
   const { cartData, cartError, cartLoading } = useCartData(cartItemsIds);
 
-  const total = cartData.reduce(
-    (total, item) => total + item.price * (quantities.get(item.id) || 1),
-    0
+  const total = useMemo(
+    () =>
+      cartData.reduce(
+        (total, item) => total + item.price * (quantities.get(item.id) || 1),
+        0
+      ),
+    [cartData, quantities]
   );
 
   return (
@@ -29,6 +40,8 @@ const ShoppingCart = () => {
                   price={item.price}
                   quantity={quantities.get(item.id) || 1}
                   image={item.image}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                  handleQuantityUpdate={handleQuantityUpdate}
                 />
               </li>
             ))}
