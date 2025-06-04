@@ -1,63 +1,58 @@
 import styles from "./App.module.css";
 import { Outlet, useLocation } from "react-router-dom";
-import { useState, useCallback, useMemo } from "react";
+import { useCallback, useMemo, useReducer } from "react";
+import cartItemsReducer from "./functions/cartItemsReducer.jsx";
+import quantitiesReducer from "./functions/quantitiesReducer.jsx";
 import Header from "./components/Header/Header.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";
 
 const App = () => {
-  const [cartItemsIds, setCartItemsIds] = useState([]);
-  const [quantities, setQuantities] = useState(new Map());
+  const [cartItemsIds, dispatchCart] = useReducer(cartItemsReducer, []);
+  const [quantities, dispatchQuantities] = useReducer(
+    quantitiesReducer,
+    new Map()
+  );
 
   const location = useLocation();
   const showHeaderCart = location.pathname.startsWith("/products");
 
   const handleAddToCart = useCallback((e) => {
     const card = e.target.closest("article");
-    const addedItem = Number(card.getAttribute("dataid"));
-    const itemQuantity = card.querySelector("input");
-    setCartItemsIds((cartItemsIds) =>
-      cartItemsIds.includes(addedItem)
-        ? cartItemsIds
-        : [...cartItemsIds, addedItem]
-    );
-    setQuantities((quantities) =>
-      new Map(quantities).set(
-        addedItem,
-        itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
-      )
-    );
+    const itemId = Number(card.getAttribute("dataid"));
+    const itemQuantity = card.querySelector("input").value;
+    dispatchCart({ type: "add", id: itemId });
+    dispatchQuantities({
+      type: "add_update",
+      id: itemId,
+      value: itemQuantity,
+    });
   }, []);
 
   const handleRemoveFromCart = useCallback((e) => {
-    const removedItemId = Number(
-      e.target.closest("article").getAttribute("dataid")
-    );
-    setCartItemsIds((cartItemsIds) =>
-      cartItemsIds.filter((item) => item !== removedItemId)
-    );
-    setQuantities((quantities) => {
-      const newMap = new Map(quantities);
-      newMap.delete(removedItemId);
-      return newMap;
+    const itemId = Number(e.target.closest("article").getAttribute("dataid"));
+    dispatchCart({ type: "remove", id: itemId });
+    dispatchQuantities({
+      type: "remove",
+      id: itemId,
     });
   }, []);
 
   const handleQuantityUpdate = useCallback((component) => {
     const card = component.closest("article");
-    const addedItem = Number(card.getAttribute("dataid"));
-    const itemQuantity = card.querySelector("input");
-
-    setQuantities((quantities) =>
-      new Map(quantities).set(
-        addedItem,
-        itemQuantity.value === "" ? 1 : Number(itemQuantity.value)
-      )
-    );
+    const itemId = Number(card.getAttribute("dataid"));
+    const itemQuantity = card.querySelector("input").value;
+    dispatchQuantities({
+      type: "add_update",
+      id: itemId,
+      value: itemQuantity,
+    });
   }, []);
 
   const handleCartReset = useCallback(() => {
-    setCartItemsIds([]);
-    setQuantities(new Map());
+    dispatchCart({ type: "reset" });
+    dispatchQuantities({
+      type: "reset",
+    });
   }, []);
 
   const outletValue = useMemo(
@@ -94,17 +89,7 @@ const App = () => {
             ]}
           />
         </aside>
-        <Outlet
-          // context={{
-          //   cartItemsIds,
-          //   quantities,
-          //   handleAddToCart,
-          //   handleRemoveFromCart,
-          //   handleQuantityUpdate,
-          //   handleCartReset,
-          // }}
-          context={outletValue}
-        />
+        <Outlet context={outletValue} />
       </main>
       <footer className={styles.footer}>&copy; Gina Kouliaki</footer>
     </>
