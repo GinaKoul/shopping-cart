@@ -16,8 +16,7 @@ const App = () => {
   const location = useLocation();
   const showHeaderCart = location.pathname.startsWith("/products");
 
-  const handleAddToCart = useCallback((e) => {
-    const card = e.target.closest("article");
+  const handleAddToCart = useCallback((card) => {
     const itemId = Number(card.getAttribute("dataid"));
     const itemQuantity = card.querySelector("input").value;
     dispatchCart({ type: "add", id: itemId });
@@ -28,8 +27,8 @@ const App = () => {
     });
   }, []);
 
-  const handleRemoveFromCart = useCallback((e) => {
-    const itemId = Number(e.target.closest("article").getAttribute("dataid"));
+  const handleRemoveFromCart = useCallback((card) => {
+    const itemId = Number(card.getAttribute("dataid"));
     dispatchCart({ type: "remove", id: itemId });
     dispatchQuantities({
       type: "remove",
@@ -37,8 +36,7 @@ const App = () => {
     });
   }, []);
 
-  const handleQuantityUpdate = useCallback((component) => {
-    const card = component.closest("article");
+  const handleQuantityUpdate = useCallback((card) => {
     const itemId = Number(card.getAttribute("dataid"));
     const itemQuantity = card.querySelector("input").value;
     dispatchQuantities({

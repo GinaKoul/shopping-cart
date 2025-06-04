@@ -1,5 +1,5 @@
 import styles from "./CartItem.module.css";
-import { memo } from "react";
+import { memo, useRef } from "react";
 import PropTypes from "prop-types";
 import Quantity from "../Quantity/Quantity.jsx";
 import Button from "../Button/Button.jsx";
@@ -14,10 +14,12 @@ const CartItem = memo(
     handleRemoveFromCart,
     handleQuantityUpdate,
   }) => {
+    const cartItemRef = useRef();
+
     const priceRound = Math.ceil(price);
 
     return (
-      <article dataid={id} className={styles.cartItem}>
+      <article ref={cartItemRef} dataid={id} className={styles.cartItem}>
         <img src={image ? image : null} className={styles.cartItemImg} alt="" />
         <div className={styles.cartItemDetails}>
           <h3>{title}</h3>
@@ -34,8 +36,12 @@ const CartItem = memo(
               id={"cardQuantity" + id}
               value={quantity}
               handleQuantityUpdate={handleQuantityUpdate}
+              itemRef={cartItemRef}
             />
-            <Button label="Remove" handleClick={handleRemoveFromCart} />
+            <Button
+              label="Remove"
+              handleClick={() => handleRemoveFromCart(cartItemRef.current)}
+            />
           </>
         )}
       </article>

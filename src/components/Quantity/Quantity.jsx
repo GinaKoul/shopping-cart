@@ -1,5 +1,5 @@
 import styles from "./Quantity.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Button from "../Button/Button.jsx";
 
@@ -9,9 +9,9 @@ const Quantity = ({
   value = 1,
   reset = false,
   handleQuantityUpdate,
+  itemRef,
 }) => {
   const [quantity, setQuantity] = useState(value);
-  const componentRef = useRef();
 
   useEffect(() => {
     if (value > 1 && reset) setQuantity(1);
@@ -19,9 +19,9 @@ const Quantity = ({
 
   useEffect(() => {
     handleQuantityUpdate &&
-      componentRef.current &&
-      handleQuantityUpdate(componentRef.current);
-  }, [quantity, handleQuantityUpdate]);
+      itemRef.current &&
+      handleQuantityUpdate(itemRef.current);
+  }, [quantity, handleQuantityUpdate, itemRef]);
 
   const handleChange = (e) => {
     setQuantity(parseInt(e.target.value) || "");
@@ -37,7 +37,7 @@ const Quantity = ({
   };
 
   return (
-    <div ref={componentRef} className={styles[type]}>
+    <div className={styles[type]}>
       <label htmlFor={id}>Quantity</label>
       <div className={styles.quantity}>
         <Button
@@ -69,6 +69,7 @@ Quantity.propTypes = {
   value: PropTypes.number,
   reset: PropTypes.bool,
   handleQuantityUpdate: PropTypes.func,
+  itemRef: PropTypes.object,
 };
 
 export default Quantity;

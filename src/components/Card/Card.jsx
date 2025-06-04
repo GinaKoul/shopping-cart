@@ -1,5 +1,5 @@
 import styles from "./Card.module.css";
-import { memo, useMemo } from "react";
+import { memo, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 import Quantity from "../Quantity/Quantity.jsx";
 import Button from "../Button/Button.jsx";
@@ -14,10 +14,12 @@ const Card = memo(
     isInCart,
     handleAddToCart,
   }) => {
+    const cardRef = useRef();
+
     const priceRound = useMemo(() => Math.ceil(price), [price]);
 
     return (
-      <article dataid={id} className={styles.card}>
+      <article ref={cardRef} dataid={id} className={styles.card}>
         <img src={image ? image : null} className={styles.cardImg} alt="" />
         <h3>{title}</h3>
         {priceRound > 0 && (
@@ -33,8 +35,12 @@ const Card = memo(
                   className={styles.cardQuantity}
                   value={quantity}
                   reset={true}
+                  itemRef={cardRef}
                 />
-                <Button label="Add To Cart" handleClick={handleAddToCart} />
+                <Button
+                  label="Add To Cart"
+                  handleClick={() => handleAddToCart(cardRef.current)}
+                />
               </>
             )}
           </>
